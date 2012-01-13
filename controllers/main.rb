@@ -8,6 +8,15 @@ post '/lead' do
   lead.name = params[:name]
   lead.email = params[:email]
   lead.save!
-  p lead
+  puts "Saved lead: " + lead.inspect
+
+  msg = {'id'=>lead.id.to_s, 'name'=>lead.email, 'name'=>lead.name}
+  puts "Putting message on queue: " + msg.inspect
+
+  resp = settings.ironmq.messages.post(msg.to_json, :queue_name=>'lead')
+  p resp
+
+  session[:flash] = "Lead saved. Thank you!"
+
   redirect "/"
 end

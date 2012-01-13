@@ -5,6 +5,12 @@
 </head>
 <body>
 
+<% if session[:flash] %>
+    <div class="flash">
+      <%= session[:flash] %>
+    </div>
+<% end %>
+
 <div class="description">
 
   <h1>Welcome</h1>

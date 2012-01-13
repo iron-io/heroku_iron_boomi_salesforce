@@ -25,7 +25,9 @@ IronWorker.configure do |iwc|
   iwc.project_id = @config["iron"]["project_id"]
 end
 
-set :ironmq, IronMQ::Client.new('token' => @config["iron"]["token"], 'project_id' => @config["iron"]["project_id"])
+ironmq =  IronMQ::Client.new('token' => @config["iron"]["token"], 'project_id' => @config["iron"]["project_id"])
+ironmq.logger.level = Logger::DEBUG
+set :ironmq, ironmq
 
 Mongoid.configure do |config|
   config.master = Mongo::Connection.from_uri(@config["mongo"]["uri"] + '/' + @config["mongo"]["database"])[@config["mongo"]["database"]]
