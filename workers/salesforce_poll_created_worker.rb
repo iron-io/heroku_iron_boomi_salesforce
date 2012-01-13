@@ -27,9 +27,12 @@ class SalesforcePollCreatedWorker << IronWorker::Base
 
       sf = Contact.find(msg['id'])
       sf.salesforce_id = msg['salesforce_id']
-      sf.save
+      sf.save!
 
-      msg.delete
+      puts "salesforce_id saved to contact."
+      p sf
+
+      p msg.delete
     end
   end
 end
