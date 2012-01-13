@@ -27,6 +27,8 @@ class SalesforcePollCreatedWorker << IronWorker::Base
       sf = Salesforce.find(msg['id'])
       sf.salesforce_id = msg['salesforce_id']
       sf.save
+
+      msg.delete
     end
   end
 end
