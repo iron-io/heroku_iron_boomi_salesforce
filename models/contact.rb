@@ -1,4 +1,4 @@
-class Salesforce
+class Contact
   include Mongoid::Document
 
   field :email, type: String

@@ -3,20 +3,32 @@ require 'sinatra'
 require 'iron_worker'
 require 'iron_mq'
 require 'mongoid'
+require 'yaml'
 
 enable :sessions
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
+@config = YAML.load_file('config.yml')
+p @config
+
+@config["iron"] ||= {}
+@config["iron"]["token"] ||= ENV['IRON_WORKER_TOKEN']
+@config["iron"]["project_id"] ||= ENV['IRON_WORKER_PROJECT_ID']
+
+@config["mongo"] ||= {}
+@config["mongo"]["uri"] ||= ENV['MONGODB_CONNECTION']
+@config["mongo"]["database"] ||= ENV['MONGODB_DATABASE']
+
 IronWorker.configure do |iwc|
-  iwc.token = ENV['IRON_WORKER_TOKEN']
-  iwc.project_id = ENV['IRON_WORKER_PROJECT_ID']
+  iwc.token = @config["iron"]["token"]
+  iwc.project_id = @config["iron"]["project_id"]
 end
 
-set :ironmq, IronMQ::Client.new('token' => ENV['IRON_WORKER_TOKEN'], 'project_id' => ENV['IRON_WORKER_PROJECT_ID'])
+set :ironmq, IronMQ::Client.new('token' => @config["iron"]["token"], 'project_id' => @config["iron"]["project_id"])
 
 Mongoid.configure do |config|
-  config.master = Mongo::Connection.from_uri(ENV['MONGODB_CONNECTION'] + '/' + ENV['MONGODB_DATABASE'])[ENV['MONGODB_DATABASE']]
+  config.master = Mongo::Connection.from_uri(@config["mongo"]["uri"] + '/' + @config["mongo"]["database"])[@config["mongo"]["database"]]
 end
 
 require 'models/salesforce'
