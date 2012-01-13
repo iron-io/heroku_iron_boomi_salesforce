@@ -1,0 +1,9 @@
+iron:
+    token: my_token
+    project_id: my_project_id
+
+mongo:
+    uri: mongodb://username:password@host:port
+    database: my_database
+
+

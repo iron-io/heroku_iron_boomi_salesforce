@@ -9,7 +9,7 @@ class SalesforcePollCreatedWorker << IronWorker::Base
 
   merge_gem 'iron_mq'
 
-  merge '../models/salesforce'
+  merge '../models/contacct'
 
   def run
     mq = IronMQ::Client.new('token' => @iron_token, 'project_id' => @iron_project_id)
@@ -25,7 +25,7 @@ class SalesforcePollCreatedWorker << IronWorker::Base
 
       msg = JSON.parse(msg)
 
-      sf = Salesforce.find(msg['id'])
+      sf = Contact.find(msg['id'])
       sf.salesforce_id = msg['salesforce_id']
       sf.save
 
