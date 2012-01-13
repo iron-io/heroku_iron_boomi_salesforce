@@ -5,11 +5,9 @@
 </head>
 <body>
 
-<% if session[:flash] %>
     <div class="flash">
-      <%= session[:flash] %>
+      <%= flash[:notice] %>
     </div>
-<% end %>
 
 <div class="description">
 

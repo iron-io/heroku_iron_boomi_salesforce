@@ -1,11 +1,13 @@
-require 'rubygems'
 require 'sinatra'
 require 'iron_worker'
 require 'iron_mq'
 require 'mongoid'
 require 'yaml'
+require 'rack-flash'
+require 'sinatra/base'
 
 enable :sessions
+use Rack::Flash
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 

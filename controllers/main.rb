@@ -16,7 +16,7 @@ post '/lead' do
   resp = settings.ironmq.messages.post(msg.to_json, :queue_name=>'lead')
   p resp
 
-  session[:flash] = "Lead saved. Thank you!"
+  flash[:notice] = "Lead saved. Thank you!"
 
   redirect "/"
 end
