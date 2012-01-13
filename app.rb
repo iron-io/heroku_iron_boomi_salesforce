@@ -9,8 +9,8 @@ enable :sessions
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
-@config = YAML.load_file('config.yml')
-p @config
+@config = {}
+@config = YAML.load_file('config.yml') if File.exists?('config.yml')
 
 @config["iron"] ||= {}
 @config["iron"]["token"] ||= ENV['IRON_WORKER_TOKEN']
@@ -31,6 +31,6 @@ Mongoid.configure do |config|
   config.master = Mongo::Connection.from_uri(@config["mongo"]["uri"] + '/' + @config["mongo"]["database"])[@config["mongo"]["database"]]
 end
 
-require 'models/salesforce'
+require 'models/contact'
 
 require 'controllers/main'
