@@ -1,14 +1,5 @@
-require 'yaml'
-require 'iron_worker'
+$: << File.expand_path(File.dirname(__FILE__))
 
-#@config = YAML.load_file('config.yml')
+require 'app'
 
-IronWorker.configure do |iwc|
-  iwc.token = ENV['IRON_WORKER_TOKEN']
-  iwc.project_id = ENV['IRON_WORKER_PROJECT_ID']
-  #iwc.token = @config['iron']['token']
-  #iwc.project_id = @config['iron']['project_id']
-end
-
-require './hello'
 run Sinatra::Application
