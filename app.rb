@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'iron_worker'
 require 'iron_mq'
+require 'mongoid'
 
 enable :sessions
 
@@ -13,5 +14,11 @@ IronWorker.configure do |iwc|
 end
 
 set :ironmq, IronMQ::Client.new('token' => ENV['IRON_WORKER_TOKEN'], 'project_id' => ENV['IRON_WORKER_PROJECT_ID'])
+
+Mongoid.configure do |config|
+  config.master = Mongo::Connection.from_uri(ENV['MONGODB_CONNECTION'] + '/' + ENV['MONGODB_DATABASE'])[ENV['MONGODB_DATABASE']]
+end
+
+require 'models/salesforce'
 
 require 'controllers/main'

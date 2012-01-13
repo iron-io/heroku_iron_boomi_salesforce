@@ -4,3 +4,5 @@ gem 'sinatra'
 
 gem 'iron_worker'
 gem 'iron_mq'
+
+gem 'mongoid'
