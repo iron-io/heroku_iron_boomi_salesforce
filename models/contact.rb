@@ -3,6 +3,7 @@ class Contact
 
   field :email, type: String
   field :name, type: String
+  field :company, type: String
   field :salesforce_id, type: String
   field :action, type: String
   field :result, type: String

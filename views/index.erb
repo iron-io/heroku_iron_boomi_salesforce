@@ -5,9 +5,9 @@
 </head>
 <body>
 
-    <div class="flash">
-      <%= flash[:notice] %>
-    </div>
+<div class="flash">
+  <%= flash[:notice] %>
+</div>
 
 <div class="description">
 
@@ -20,6 +20,9 @@
   <form action="/lead" method="post">
     Name<br/>
     <input type="text" name="name"/><br/>
+    <br/>
+    Company<br/>
+    <input type="text" name="company"/><br/>
     <br/>
     Email<br/>
     <input type="text" name="email"/><br/>
