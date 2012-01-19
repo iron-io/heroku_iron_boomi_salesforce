@@ -1,13 +1,14 @@
-require 'mongoid'
+require 'iron_worker'
 
-class SalesforcePollCreatedWorker << IronWorker::Base
+class SalesforcePollCreatedWorker < IronWorker::Base
   attr_accessor :iron_project_id
   attr_accessor :iron_token
 
-  attr_accessor :mongodb_connection
+  attr_accessor :mongodb_uri
   attr_accessor :mongodb_database
 
   merge_gem 'iron_mq'
+  merge_gem 'mongoid'
 
   merge '../models/contact'
 
@@ -16,7 +17,7 @@ class SalesforcePollCreatedWorker << IronWorker::Base
     mq.queue_name = 'lead_created'
 
     Mongoid.configure do |config|
-      config.master = Mongo::Connection.from_uri(@mongodb_connection + '/' + @mongodb_database)[@mongodb_database]
+      config.master = Mongo::Connection.from_uri(@mongodb_uri + '/' + @mongodb_database)[@mongodb_database]
     end
 
     while true
