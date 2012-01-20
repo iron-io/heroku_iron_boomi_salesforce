@@ -1,6 +1,3 @@
-get '*' do
-  erb :index
-end
 
 post '/lead' do
   puts 'in lead'
@@ -25,4 +22,13 @@ post '/lead' do
   flash[:notice] = "Lead saved. Thank you!"
 
   redirect "/"
+end
+
+get '/leads' do
+  @contacts = Contact.all
+  erb :contacts
+end
+
+get '*' do
+  erb :index
 end

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contacts</title>
+</head>
+<body>
+
+<div class="flash">
+  <%= flash[:notice] %>
+</div>
+
+<div class="description">
+
+  <h1>Contacts</h1>
+  
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Action</th>
+      <th>To</th>
+      <th>Salesforce ID</th>
+    </tr>
+    <% @contacts.each do |c| %>
+    <tr>
+      <td><%= c.id %></td>
+      <td><%= c.name %></td>
+      <td><%= c.email %></td>
+      <td><%= c.company %></td>
+      <td><%= c.action %></td>
+      <td><%= c.result %></td>
+      <td><%= c.salesforce_id %></td>
+    </tr>
+    <% end %>
+    
+  </table>
+
+</div>
+</body>
+</html>
