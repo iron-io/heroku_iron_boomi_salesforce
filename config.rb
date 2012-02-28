@@ -18,5 +18,5 @@ f = File.dirname(__FILE__) + '/config.yml'
 @config["iron"]["project_id"] ||= ENV['IRON_PROJECT_ID'] || ENV['IRON_WORKER_PROJECT_ID']
 
 @config["mongo"] ||= {}
-@config["mongo"]["uri"] ||= ENV['MONGODB_URI']
-@config["mongo"]["database"] ||= ENV['MONGODB_DATABASE']
+@config["mongo"]["uri"] ||= ENV['MONGO_URI']
+@config["mongo"]["database"] ||= ENV['MONGO_DATABASE']

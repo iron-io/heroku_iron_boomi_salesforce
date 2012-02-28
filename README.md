@@ -8,9 +8,11 @@ To run in development:
 
 To run on heroku:
 
-- heroku addons:add iron_worker
-- heroku addons:add iron_mq
-- git push heroku master
+    heroku addons:add iron_worker
+    heroku addons:add iron_mq
+    heroku config:add MONGO_URI=YOUR MONGO URI
+    heroku config:add MONGO_DATABASE=DATABASE NAME
+    git push heroku master
 
 Since there are several parties involved you will have to share your Iron.io project with another party or they will have
 to share their Iron.io project with you. If someone else shares it with you, you will have to set the Heroku environment
