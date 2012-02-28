@@ -22,10 +22,18 @@ class SalesforcePollCreatedWorker < IronWorker::Base
 
     while true
       msg = mq.messages.get
-      break if msg.nil?
+      if msg.nil?
+        puts 'No more messages'
+        break
+      end
 
       p msg
       p msg.body
+      if msg.body.nil? || msg.body == ""
+        puts "Body is null, deleting."
+        msg.delete
+        next
+      end
 
       msg = JSON.parse(msg.body)
 
