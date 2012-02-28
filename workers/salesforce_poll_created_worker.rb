@@ -24,7 +24,10 @@ class SalesforcePollCreatedWorker < IronWorker::Base
       msg = mq.messages.get
       break if msg.nil?
 
-      msg = JSON.parse(msg)
+      p msg
+      p msg.body
+
+      msg = JSON.parse(msg.body)
 
       log "got salesforce_id #{msg['salesforce_id']} for contact id #{msg['id']}"
 
