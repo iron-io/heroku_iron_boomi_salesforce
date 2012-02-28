@@ -14,8 +14,8 @@ f = File.dirname(__FILE__) + '/config.yml'
 @config = {} unless @config
 
 @config["iron"] ||= {}
-@config["iron"]["token"] ||= ENV['IRON_WORKER_TOKEN']
-@config["iron"]["project_id"] ||= ENV['IRON_WORKER_PROJECT_ID']
+@config["iron"]["token"] ||= ENV['IRON_TOKEN'] || ENV['IRON_WORKER_TOKEN']
+@config["iron"]["project_id"] ||= ENV['IRON_PROJECT_ID'] || ENV['IRON_WORKER_PROJECT_ID']
 
 @config["mongo"] ||= {}
 @config["mongo"]["uri"] ||= ENV['MONGODB_URI']

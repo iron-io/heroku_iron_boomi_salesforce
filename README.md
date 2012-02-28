@@ -12,3 +12,10 @@ To run on heroku:
 - heroku addons:add iron_mq
 - git push heroku master
 
+Since there are several parties involved you will have to share your Iron.io project with another party or they will have
+to share their Iron.io project with you. If someone else shares it with you, you will have to set the Heroku environment
+variables explicitly:
+
+    heroku config:add IRON_TOKEN=TOKEN
+    heroku config:add IRON_PROJECT_ID=PROJECT_ID
+
