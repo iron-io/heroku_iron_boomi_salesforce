@@ -35,15 +35,21 @@ class SalesforcePollCreatedWorker < IronWorker::Base
         next
       end
 
-      msg = JSON.parse(msg.body)
+      body = JSON.parse(msg.body)
 
-      log "got salesforce_id #{msg['salesforce_id']} for contact id #{msg['id']}"
+      puts "got salesforce_id #{body['salesforce_id']} for contact id #{body['id']}"
 
-      c = Contact.find(msg['id'])
-      c.salesforce_id = msg['salesforce_id']
+      begin
+        c = Contact.find(body['id'])
+      rescue => ex
+        puts "Couldn't find contact! #{ex.message}"
+        p msg.delete
+        next
+      end
+      c.salesforce_id = body['salesforce_id']
       c.save!
 
-      log "set salesforce_id for contact id #{c.id} email #{c.email}"
+      puts "set salesforce_id for contact id #{c.id} email #{c.email}"
 
       p msg.delete
     end
