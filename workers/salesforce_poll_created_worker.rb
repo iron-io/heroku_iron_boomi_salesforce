@@ -40,7 +40,7 @@ class SalesforcePollCreatedWorker < IronWorker::Base
       puts "got salesforce_id #{body['salesforce_id']} for contact id #{body['id']}"
 
       begin
-        c = Contact.find(body['id'])
+        c = Contact.find(BSON::ObjectId(body['id']))
       rescue => ex
         puts "Couldn't find contact! #{ex.message}"
         p msg.delete

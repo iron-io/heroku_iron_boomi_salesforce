@@ -35,7 +35,8 @@ GEM
       tzinfo (~> 0.3.22)
     multi_json (1.1.0)
     rack (1.4.1)
-    rack-flash (0.1.2)
+    rack-flash3 (1.0.0)
+      rack
       rack
     rack-protection (1.2.0)
       rack
@@ -60,5 +61,5 @@ DEPENDENCIES
   iron_mq
   iron_worker
   mongoid
-  rack-flash
+  rack-flash3
   sinatra

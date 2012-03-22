@@ -1,8 +1,7 @@
-$: << '.'
-
-require '../config'
-
-require 'salesforce_poll_created_worker'
+require 'iron_worker'
+require 'time'
+require_relative '../config'
+require_relative 'salesforce_poll_created_worker'
 
 IronWorker.logger.level = Logger::DEBUG
 
@@ -17,5 +16,7 @@ worker.iron_token = @config['iron']['token']
 worker.mongodb_uri = @config['mongo']['uri']
 worker.mongodb_database = @config['mongo']['database']
 
-worker.run_local
-#worker.queue
+#worker.run_local
+worker.queue
+#worker.upload
+#worker.schedule(:start_at=>Time.now.iso8601, :run_every=>600)
