@@ -21,6 +21,7 @@
       <th>Company</th>
       <th>Action</th>
       <th>To</th>
+      <th>Status</th>
       <th>Salesforce ID</th>
     </tr>
     <% @contacts.each do |c| %>
@@ -31,6 +32,7 @@
       <td><%= c.company %></td>
       <td><%= c.action %></td>
       <td><%= c.result %></td>
+      <td><%= c.status %></td>
       <td><%= c.salesforce_id %></td>
     </tr>
     <% end %>

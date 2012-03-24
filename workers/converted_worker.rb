@@ -1,6 +1,6 @@
 require 'iron_worker'
 
-class SalesforcePollCreatedWorker < IronWorker::Base
+class ConvertedWorker < IronWorker::Base
   attr_accessor :iron_project_id
   attr_accessor :iron_token
 
@@ -14,7 +14,7 @@ class SalesforcePollCreatedWorker < IronWorker::Base
 
   def run
     mq = IronMQ::Client.new('token' => @iron_token, 'project_id' => @iron_project_id)
-    mq.queue_name = 'lead_created'
+    mq.queue_name = 'converted'
 
     Mongoid.configure do |config|
       config.master = Mongo::Connection.from_uri(@mongodb_uri + '/' + @mongodb_database)[@mongodb_database]
@@ -37,21 +37,27 @@ class SalesforcePollCreatedWorker < IronWorker::Base
 
       body = JSON.parse(msg.body)
 
-      puts "got salesforce_id #{body['salesforce_id']} for contact id #{body['id']}"
+      salesforce_id = body['salesforce_id']
+      puts "got salesforce_id #{salesforce_id}"
 
+      c = nil
       begin
-        c = Contact.find(BSON::ObjectId(body['id']))
+        c = Contact.where(salesforce_id: salesforce_id).first
       rescue => ex
-        puts "Couldn't find contact! #{ex.message}"
-        p msg.delete
+        puts "Error finding contact! #{ex.message}"
+      end
+      if c.nil?
+        puts "Couldn't find contact! #{salesforce_id}"
+        # p msg.delete
         next
       end
-      c.salesforce_id = body['salesforce_id']
+      c.action = body['action']
+      c.status = body['to'] # opportunity
       c.save!
 
       puts "set salesforce_id for contact id #{c.id} email #{c.email}"
 
-      p msg.delete
+      #p msg.delete
     end
   end
 end
