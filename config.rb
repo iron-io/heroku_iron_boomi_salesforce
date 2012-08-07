@@ -1,22 +1,15 @@
 require 'yaml'
+require 'uber_config'
 
-def load_config(f)
-  config = nil
-  if File.exists?(f)
-    config = YAML.load_file(f)
-  end
-  config
-end
+@config = UberConfig.load
+UberConfig.symbolize_keys!(@config)
 
-f = File.dirname(__FILE__) + '/config.yml'
-@config = load_config(f)
-@config = load_config(File.expand_path(File.join("~", "Dropbox", "configs", "boomi", "config.yml"))) unless @config
 @config = {} unless @config
+@config[:iron] ||= {}
+#@config[:iron][:token] ||= ENV['IRON_TOKEN'] || ENV['IRON_WORKER_TOKEN']
+#@config[:iron][:project_id] ||= ENV['IRON_PROJECT_ID'] || ENV['IRON_WORKER_PROJECT_ID']
 
-@config["iron"] ||= {}
-@config["iron"]["token"] ||= ENV['IRON_TOKEN'] || ENV['IRON_WORKER_TOKEN']
-@config["iron"]["project_id"] ||= ENV['IRON_PROJECT_ID'] || ENV['IRON_WORKER_PROJECT_ID']
+ENV['IRON_WORKER_TOKEN'] ||= @config[:iron][:token]
+ENV['IRON_WORKER_PROJECT_ID'] ||= @config[:iron][:project_id]
 
-@config["mongo"] ||= {}
-@config["mongo"]["uri"] ||= ENV['MONGO_URI']
-@config["mongo"]["database"] ||= ENV['MONGO_DATABASE']
+
