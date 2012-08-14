@@ -5,8 +5,11 @@ post '/lead' do
   lead.name = params[:name]
   lead.email = params[:email]
   lead.company = params[:company]
-  lead.save!
+  #lead.save!
+  settings.orm.save(lead)
   puts "Saved lead: " + lead.inspect
+
+  settings.orm.add_to_list("lead_list", lead)
 
   msg = {
       'id'=>lead.id.to_s,
@@ -16,16 +19,15 @@ post '/lead' do
   }
   puts "Putting message on queue: " + msg.inspect
 
-  resp = settings.ironmq.messages.post(msg.to_json, :queue_name=>'lead')
-  p resp
+  settings.ironmq.messages.post(msg.to_json, :queue_name=>'lead')
 
-  flash[:notice] = "Lead saved. Thank you!"
+  flash[:notice] = "Submitted, thank you!"
 
   redirect "/"
 end
 
 get '/leads' do
-  @contacts = Contact.all
+  @contacts = settings.orm.get_list("lead_list")
   erb :contacts
 end
 

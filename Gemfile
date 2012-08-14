@@ -4,6 +4,7 @@ gem 'sinatra', :require=>'sinatra/base'
 
 gem 'iron_worker'
 gem 'iron_mq'
+gem 'iron_cache'
 
 gem 'rack-flash3' # Fixes issues with new rack
 gem 'jsonable' # serializing classes

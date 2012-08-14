@@ -1,9 +1,11 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    iron_cache (1.1.1)
+      iron_core (>= 0.2.0)
     iron_core (0.3.3)
       rest (>= 2.0.0)
-    iron_mq (2.1.0)
+    iron_mq (2.1.1)
       iron_core (>= 0.2.0)
     iron_worker (2.3.15)
       bundler
@@ -45,6 +47,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  iron_cache
   iron_mq
   iron_worker
   jsonable
