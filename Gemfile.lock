@@ -1,20 +1,15 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    iron_cache (1.1.1)
+    iron_cache (1.1.2)
       iron_core (>= 0.2.0)
     iron_core (0.3.3)
       rest (>= 2.0.0)
     iron_mq (2.1.1)
       iron_core (>= 0.2.0)
-    iron_worker (2.3.15)
-      bundler
-      bundler
-      rest
-      rest
-      rest-client
-      rest-client
-      zip
+    iron_worker_ng (0.10.0)
+      bundler (> 1.0.0)
+      iron_core (>= 0.3.0)
       zip
     jsonable (0.0.3)
     macaddr (1.6.1)
@@ -32,7 +27,7 @@ GEM
       rest-client (>= 0.3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    sinatra (1.3.2)
+    sinatra (1.3.3)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
       tilt (~> 1.3, >= 1.3.3)
@@ -49,7 +44,7 @@ PLATFORMS
 DEPENDENCIES
   iron_cache
   iron_mq
-  iron_worker
+  iron_worker_ng
   jsonable
   rack-flash3
   rest

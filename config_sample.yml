@@ -1,4 +1,10 @@
 iron:
-    project_id: my_project_id
+    project_id: MY PROJECT ID
+    # token: optional if not set in ENV or ~/.iron.json
 
-
+email:
+    host: smtp.sendgrid.net
+    domain: YOUR DOMAIN, eg: yourbiz.com
+    port: 587
+    username: USERNAME
+    password: PASS
