@@ -1,6 +1,9 @@
+# app_name will be used for cache naming and other things
+app_name: "irondream.herokuapp.com"
+
 iron:
-    project_id: MY PROJECT ID
-    # token: optional if not set in ENV or ~/.iron.json
+    token: MY IRON.IO TOKEN
+    project_id: MY IRON.IO PROJECT ID
 
 email:
     host: smtp.sendgrid.net
@@ -8,3 +11,5 @@ email:
     port: 587
     username: USERNAME
     password: PASS
+    from: ADDRESS MESSAGES WILL BE SENT FROM
+

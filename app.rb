@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'iron_worker'
+require 'iron_worker_ng'
 require 'iron_mq'
 require 'iron_cache'
 require 'yaml'

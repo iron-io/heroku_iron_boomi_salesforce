@@ -1,17 +1,24 @@
 First you need a token and project_id from your Iron.io account. Login at http://www.iron.io
-to get it.
+to get it or to sign up.
 
 To run in development:
 
 - Copy the config_sample.yml file and fill in the appropriate values.
-- Run _rackup_ at the command line.
+- Run `rake push_config` to store config
+- Run `rackup` at the command line
 
 To run on heroku:
 
-    heroku addons:add iron_worker
-    heroku addons:add iron_mq
-    heroku config:add MONGO_URI=YOUR MONGO URI
-    heroku config:add MONGO_DATABASE=DATABASE NAME
+
+
+Now type
+
+    heroku config
+
+To get your new project id's and tokens for the Iron products.
+
+
+
     git push heroku master
 
 Since there are several parties involved you will have to share your Iron.io project with another party or they will have

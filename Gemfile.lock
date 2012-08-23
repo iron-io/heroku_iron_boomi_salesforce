@@ -1,15 +1,14 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    iron_cache (1.1.2)
-      iron_core (>= 0.2.0)
-    iron_core (0.3.3)
-      rest (>= 2.0.0)
-    iron_mq (2.1.1)
-      iron_core (>= 0.2.0)
-    iron_worker_ng (0.10.0)
-      bundler (> 1.0.0)
-      iron_core (>= 0.3.0)
+    iron_cache (1.2.1)
+      iron_core (>= 0.4.2)
+    iron_core (0.4.2)
+      rest (>= 2.0.2)
+    iron_mq (2.1.2)
+      iron_core (>= 0.4.2)
+    iron_worker_ng (0.10.1)
+      iron_core (>= 0.4.2)
       zip
     jsonable (0.0.3)
     macaddr (1.6.1)

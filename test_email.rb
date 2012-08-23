@@ -4,7 +4,6 @@ iw = IronWorkerNG::Client.new
 task = iw.tasks.create("email_worker",
                        SingletonConfig.config.merge(
                            to: "treeder@gmail.com",
-                           from: "travis@iron.io",
                            subject: "Thanks for the Lead!",
                            body: "Thanks again for the lead"
 
